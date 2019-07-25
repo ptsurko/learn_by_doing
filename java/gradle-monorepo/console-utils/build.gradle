@@ -1,0 +1,18 @@
+plugins {
+    id 'java-library'
+    id 'idea'
+}
+
+version '1.0'
+
+sourceCompatibility = 1.8
+
+group = 'example'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
