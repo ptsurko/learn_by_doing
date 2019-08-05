@@ -1,0 +1,71 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    volumes:
+      - ${PWD}/web/:/usr/src/app
+      # - /usr/src/app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://user:pass@postgres:5432/testdb
+    # depends_on:
+    #   - postgres
+
+  # node-exporter:
+  #   image: quay.io/prometheus/node-exporter
+
+  # postgres-exporter:
+  #   image: wrouesnel/postgres_exporter
+  #   environment:
+  #     DATA_SOURCE_NAME: postgres://user:pass@postgres:5432/testdb?sslmode=disable
+
+  statsd-exporter:
+    image: prom/statsd-exporter
+    # command: "-statsd.mapping-config=/tmp/statsd_mapping.conf"
+    ports:
+      - "9102:9102"
+      - "9125:9125/udp"
+    volumes:
+      - ${PWD}/statsd/statsd_mapping.conf:/tmp/statsd_mapping.conf
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ${PWD}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-volume:/prometheus
+    depends_on:
+      - statsd-exporter
+      # - node-exporter
+      # - postgres-exporter
+
+  # postgres:
+  #   image: postgres:9.6.2-alpine
+  #   ports:
+  #     - "5432:5432"
+  #   environment:
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: pass
+  #     POSTGRES_DB: testdb
+  #   volumes:
+  #     - postgres-volume:/var/lib/postgresql/data
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "5000:3000"
+    volumes:
+      # - ${PWD}/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - grafana-volume:/var/lib/grafana
+      # - ${PWD}/grafana/data:/var/lib/grafana
+
+volumes:
+  postgres-volume:
+  prometheus-volume:
+  grafana-volume:
+    

@@ -1,0 +1,1 @@
+ab -c 50 -n 500000 -p docker-cleanup.sh -r -T application/json 192.168.99.101:3000/api/users

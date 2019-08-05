@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    volumes:
+      - ${PWD}/web:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_WRITE_HOST: postgres-master
+      DATABASE_READ_HOST1: postgres-slave1
+      DATABASE_READ_HOST2: postgres-slave2
+    depends_on:
+      - postgres-master
+      - postgres-slave1
+      - postgres-slave2
+      
+  postgres-master:
+    build:
+      context: ./dbmaster
+      dockerfile: Dockerfile
+    ports:
+      - "54321:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: testdb
+      PG_REP_USER: rep
+      PG_REP_PASSWORD: 123456
+
+  postgres-slave1:
+    build:
+      context: ./dbslave
+      dockerfile: Dockerfile
+    ports:
+      - "54322:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: testdb
+      PG_REP_USER: rep
+      PG_REP_PASSWORD: 123456
+    depends_on:
+     - postgres-master
+  postgres-slave2:
+    build:
+      context: ./dbslave
+      dockerfile: Dockerfile
+    ports:
+      - "54323:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: testdb
+      PG_REP_USER: rep
+      PG_REP_PASSWORD: 123456
+    depends_on:
+     - postgres-master
