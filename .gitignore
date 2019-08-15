@@ -32,6 +32,9 @@ hs_err_pid*
 build/
 gradle/
 out/
+.classpath
+.project
+.settings/
 
 node_modules/
 .next/
