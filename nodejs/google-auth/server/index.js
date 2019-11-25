@@ -8,7 +8,7 @@ const CookieStrategy = require('passport-cookie');
 
 require('dotenv').config();
 
-const SESSION_COOKIE_NAME = 'session.id';
+const SESSION_COOKIE_NAME = 'nodejs.google-auth.session.id';
 
 passport.use(new OAuth2Strategy({
   clientID: process.env.GOOGLE_CONSUMER_KEY,
@@ -17,6 +17,8 @@ passport.use(new OAuth2Strategy({
 }, function (accessToken, refreshToken, profile, done) {
   console.log('accessToken: ', accessToken);
   console.log('refreshToken: ', refreshToken);
+  console.log('profile: ', profile);
+
   const email = profile.emails
     .map(item => item.value)
     .find(email => email);
@@ -43,7 +45,6 @@ app.prepare()
     const server = express();
     server.use(cookieParser());
     server.use(passport.initialize());
-    server.use(passport.session());
 
     server.get('/auth/login',
       passport.authenticate('google', { session: false, scope: ['email', 'profile'] }),

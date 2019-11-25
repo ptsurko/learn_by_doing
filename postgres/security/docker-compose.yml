@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  # app:
+  #   build:
+  #     context: ./web
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ${PWD}/web:/usr/src/app
+  #     - /usr/src/app/node_modules
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     DATABASE_URL: postgres://user:pass@postgres:5432/dvdrental
+
+  postgres:
+    image: tadaken3/postgres-dvdrental-database
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+    # volumes:
+    #   - ${PWD}/db:/var/lib/postgresql/data

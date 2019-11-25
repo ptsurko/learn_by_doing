@@ -2,4 +2,8 @@ FROM tomcat:alpine
 
 RUN ["rm", "-fr", "/usr/local/tomcat/webapps/ROOT"]
 
-COPY ./build/libs/test.war /usr/local/tomcat/webapps/ROOT.war
+#ADD ./build/libs/test.war /usr/local/tomcat/webapps/ROOT.war
+
+#COPY ./build/libs/test.war /usr/local/tomcat/webapps/ROOT.war
+
+#CMD ["catalina.sh", "run"]

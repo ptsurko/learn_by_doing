@@ -1,0 +1,4 @@
+- https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-against-automated-attacks
+- https://severalnines.com/database-blog/how-secure-your-postgresql-database-10-tips
+- https://www.upguard.com/articles/10-ways-to-bolster-postgresql-security
+- https://aws.amazon.com/blogs/database/managing-postgresql-users-and-roles/

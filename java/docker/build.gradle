@@ -20,5 +20,5 @@ dependencies {
 }
 
 war {
-    archiveName = 'test.war'
+    archiveName = 'ROOT.war'
 }

@@ -1,0 +1,3 @@
+ - https://dba.stackexchange.com/questions/111101/storing-a-billing-address-best-practice-in-orders-table/111115#111115
+ - https://dba.stackexchange.com/questions/107354/storing-created-retired-dates-for-a-large-amount-of-different-entities/107575#107575
+ - https://stackoverflow.com/questions/4491173/historical-auditable-database/4573129#4573129

@@ -1,0 +1,1 @@
+https://medium.com/riipen-engineering/sequelize-data-replication-to-elasticsearch-99b7891046ad

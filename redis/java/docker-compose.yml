@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  redis1:
+    build: ./redis 
+
+  # redis2:
+  #   build: ./redis 
+
+  app:
+    build: ./app
+    volumes:
+      - ${PWD}/app/build/libs:/usr/local/tomcat/webapps
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis1
+      # - redis2

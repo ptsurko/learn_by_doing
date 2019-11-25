@@ -12,6 +12,8 @@ function Home() {
         <a href="/auth/user">User</a>
         &nbsp;&nbsp;
         <a href="/auth/user/profile">Profile</a>
+        &nbsp;&nbsp;
+        <a href="/auth/logout">Logout</a>
       </div>
     </div>
   );
