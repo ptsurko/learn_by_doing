@@ -1,3 +1,5 @@
-FROM tomcat:alpine
+FROM java:8-jdk-alpine
 
-ENTRYPOINT ["catalina.sh", "jpda", "run"]
+WORKDIR /usr/app
+
+ENTRYPOINT ["java", "-cp", "app.jar", "demo.App"]

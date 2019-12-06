@@ -33,6 +33,7 @@ build/
 gradle/
 out/
 java/*/bin/
+java/**/bin/
 .classpath
 .project
 .settings/
