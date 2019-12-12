@@ -1,6 +1,7 @@
 version: '3'
 
 services:
+<<<<<<< Updated upstream
   app:
     build:
       context: ./web
@@ -21,3 +22,21 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: testdb
+=======
+  api:
+    environment:
+      - NODE_ENV=development
+    user: root
+    build:
+      context: ./api
+      args:
+        - NODE_ENV=development
+    ports:
+      - 3000:3000
+    # command: nodemon src/index.js
+    volumes:
+      - ./api/:/usr/src/app
+
+    # command: ls -la /usr/src/app/src
+    command: ls -la
+>>>>>>> Stashed changes
