@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-app1
+  namespace: default
+  labels:
+    app: k8s-app1
+spec:
+  # replicas: 3
+  # strategy:
+  #   type: RollingUpdate
+  #   rollingUpdate:
+  #     maxSurge: 1
+  #     maxUnavailable: 33%
+  selector:
+    matchLabels:
+      app: k8s-app1
+  template:
+    metadata:
+      labels:
+        app: k8s-app1
+    spec:
+      containers:
+        - name: k8s-app1
+          image: ptsurko/k8s-app1:latest
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: POSTGRES_PASSWORD
+          ports:
+            - containerPort: 8080
+              name: http
+          volumeMounts:
+            - name: app-config
+              mountPath: "/etc/app-config"
+              readOnly: true
+            - name: k8s-app1-pvc
+              mountPath: /pvc-data
+      volumes:
+        - name: app-config
+          secret:
+            secretName: k8s-app1-config
+        - name: k8s-app1-pvc
+          persistentVolumeClaim:
+            claimName: k8s-app1-pvc

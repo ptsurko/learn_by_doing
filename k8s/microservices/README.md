@@ -1,0 +1,12 @@
+TODO:
+ - database(statefulset)
+  - https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/
+  - https://severalnines.com/database-blog/using-kubernetes-deploy-postgresql
+  - https://github.com/arianitu/postgres-statefulset/blob/ddc67a5aebd200fe9bba357bb12b49d2d0fd7a1e/statefulset-master.yml
+ - second service
+ - service discovery
+ - canary release
+ - daemonset
+ - ingress
+    - https://medium.com/google-cloud/kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0
+    - https://blog.getambassador.io/kubernetes-ingress-nodeport-load-balancers-and-ingress-controllers-6e29f1c44f2d

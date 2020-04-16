@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-app1-ci
+  namespace: default
+  labels:
+    app: k8s-app1
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      protocol: TCP
+  selector:
+    app: k8s-app1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-app1-np
+  namespace: default
+  labels:
+    app: k8s-app1
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      protocol: TCP
+  selector:
+    app: k8s-app1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-app1-lb
+  namespace: default
+  labels:
+    app: k8s-app1
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      protocol: TCP
+  selector:
+    app: k8s-app1
